@@ -4,15 +4,22 @@ Une application web adorable qui combine une liste de tâches dynamique et un co
 
 ## 🚀 Fonctionnalités
 
-- ✅ Ajouter, cocher, supprimer des tâches
+- ✅ Ajouter, cocher, modifier (✏️), supprimer des tâches
+- 🧹 Supprimer d'un coup toutes les tâches terminées
+- 🔢 Compteur de tâches restantes
 - 🎤 Ajout vocal sur mobile (via micro intégré)
 - 💾 Stockage local des tâches (même après rechargement)
-- 🐱 Chat SVG animé avec oreilles géantes
+- 🐱 Chat SVG animé : yeux qui suivent le doigt, clignements, sieste quand la liste est vide, saut de joie quand tout est fait
 - 🔊 Miaou enjoué à chaque ajout
+- 📄 Export JSON
 - 💻 Compatible PC / 📱 Mobile
 
-## 🎨 Aperçu
-
-![screenshot](./assets/capture.png) <!-- remplace par une capture de ton app si tu veux -->
-
 ## 📁 Structure
+
+```
+index.html      → la page
+styles.css      → le style et les animations du chat
+script.js       → la logique (tâches, voix, yeux du chat)
+manifest.json   → installation sur l'écran d'accueil
+assets/         → icone.png, miaou.mp3, capture.png
+```

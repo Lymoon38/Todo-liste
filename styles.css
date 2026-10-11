@@ -1,0 +1,238 @@
+/* 📱 Correctif mobile : le padding ne s'ajoute plus à la largeur */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 20px 10px;
+  overflow-x: hidden;
+}
+
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 340px;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1.5em;
+}
+
+.chat-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* ---------- Le chat ---------- */
+
+.chat-container svg.bounce {
+  animation: bounce 0.5s ease;
+}
+
+/* Grand saut de joie quand toutes les tâches sont faites */
+.chat-container svg.joy {
+  animation: joy 1s ease;
+}
+
+@keyframes bounce {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-20px); }
+  60%  { transform: translateY(10px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes joy {
+  0%   { transform: translateY(0) rotate(0); }
+  20%  { transform: translateY(-35px) rotate(-8deg); }
+  40%  { transform: translateY(0) rotate(0); }
+  60%  { transform: translateY(-25px) rotate(8deg); }
+  80%  { transform: translateY(0) rotate(0); }
+  100% { transform: translateY(0) rotate(0); }
+}
+
+/* Clignement des yeux */
+.eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: blink 5s infinite;
+}
+
+@keyframes blink {
+  0%, 94%, 100% { transform: scaleY(1); }
+  97%           { transform: scaleY(0.1); }
+}
+
+/* Chat endormi : yeux fermés, pas de clignement */
+#chat.sleep .eye {
+  animation: none;
+  transform: scaleY(0.12);
+}
+
+#zzz {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 20%;
+  font-size: 1.6em;
+  animation: float 2s ease-in-out infinite;
+}
+
+#chat.sleep + #zzz {
+  display: block;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50%      { transform: translateY(-8px); opacity: 0.6; }
+}
+
+#compteur {
+  text-align: center;
+  color: #555;
+  font-size: 0.95em;
+  margin: 0 0 15px;
+}
+
+/* ---------- Formulaire ---------- */
+
+form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 8px;
+  font-size: 16px; /* évite le zoom automatique sur iPhone */
+}
+
+button[type="submit"] {
+  background-color: #2ecc71;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #27ae60;
+}
+
+#mic-btn {
+  background-color: #b80fd6;
+  color: white;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#mic-btn.listening {
+  background-color: #e74c3c;
+}
+
+#export-btn,
+#clear-btn {
+  margin-top: 10px;
+  padding: 8px;
+  width: 100%;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#export-btn { background: #3498db; }
+#clear-btn  { background: #e67e22; }
+#clear-btn[hidden] { display: none; }
+
+/* ---------- Liste ---------- */
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+li {
+  background: #eee;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  animation: fadeIn 0.4s ease;
+}
+
+li > span {
+  flex: 1;
+  min-width: 0;
+  word-break: break-word; /* un long mot ne fait plus déborder la page */
+}
+
+li > input {
+  flex: 1;
+}
+
+li > div {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+li.completed > span {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+li button {
+  border: none;
+  color: white;
+  padding: 5px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+li .btn-done   { background: #2ecc71; }
+li .btn-edit   { background: #3498db; }
+li .btn-delete { background: red; }
+
+svg {
+  width: 100%;
+  height: auto;
+}
+
+/* Respect du réglage « réduire les animations » */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+  }
+}
